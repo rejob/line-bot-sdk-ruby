@@ -12,10 +12,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-module Line
+module LineBot
   module Bot
     module Event
-      class Join < Base
+      class Unfollow < Base
       end
     end
   end

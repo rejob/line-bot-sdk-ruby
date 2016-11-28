@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-module Line
+module LineBot
   module Bot
     module Event
       module MessageType
@@ -28,9 +28,9 @@ module Line
       class Message < Base
         def type
           begin
-            Line::Bot::Event::MessageType.const_get(@src['message']['type'].capitalize)
+            LineBot::Bot::Event::MessageType.const_get(@src['message']['type'].capitalize)
           rescue NameError => e
-            Line::Bot::Event::MessageType::Unsupport
+            LineBot::Bot::Event::MessageType::Unsupport
           end
         end
 

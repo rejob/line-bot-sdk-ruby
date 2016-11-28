@@ -12,18 +12,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-module Line
+module LineBot
   module Bot
     module Event
-      class Base
-        def initialize(src)
-          @src = src
-        end
-
-        def [](key)
-          @src[key]
-        end
-
+      class Beacon < Base
       end
     end
   end

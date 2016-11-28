@@ -12,11 +12,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-require 'line/bot/event/base'
-require 'line/bot/event/beacon'
-require 'line/bot/event/follow'
-require 'line/bot/event/join'
-require 'line/bot/event/leave'
-require 'line/bot/event/message'
-require 'line/bot/event/postback'
-require 'line/bot/event/unfollow'
+module LineBot
+  module Bot
+    module API
+      VERSION = "1.0.0"
+    end
+  end
+end

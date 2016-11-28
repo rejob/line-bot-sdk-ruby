@@ -12,11 +12,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-module Line
-  module Bot
-    module Event
-      class Follow < Base
-      end
-    end
-  end
-end
+require 'linebot/bot/event/base'
+require 'linebot/bot/event/beacon'
+require 'linebot/bot/event/follow'
+require 'linebot/bot/event/join'
+require 'linebot/bot/event/leave'
+require 'linebot/bot/event/message'
+require 'linebot/bot/event/postback'
+require 'linebot/bot/event/unfollow'

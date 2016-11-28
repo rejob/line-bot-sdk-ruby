@@ -1,9 +1,9 @@
-# Line::Bot::API
+# LineBot::Bot::API
 
 [![Gem-version](https://img.shields.io/gem/v/line-bot-api.svg)](https://rubygems.org/gems/line-bot-api) [![Build Status](https://travis-ci.org/line/line-bot-sdk-ruby.svg?branch=master)](https://travis-ci.org/line/line-bot-sdk-ruby)
 
 
-Line::Bot::API - SDK of the LINE Messaging API for Ruby.
+LineBot::Bot::API - SDK of the LINE Messaging API for Ruby.
 
 ## About the LINE Messaging API
 
@@ -18,10 +18,10 @@ Usage:
 ```ruby
 # app.rb
 require 'sinatra'
-require 'line/bot'
+require 'linebot/bot'
 
 def client
-  @client ||= Line::Bot::Client.new { |config|
+  @client ||= LineBot::Bot::Client.new { |config|
     config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
     config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
   }
@@ -38,15 +38,15 @@ post '/callback' do
   events = client.parse_events_from(body)
   events.each { |event|
     case event
-    when Line::Bot::Event::Message
+    when LineBot::Bot::Event::Message
       case event.type
-      when Line::Bot::Event::MessageType::Text
+      when LineBot::Bot::Event::MessageType::Text
         message = {
           type: 'text',
           text: event.message['text']
         }
         client.reply_message(event['replyToken'], message)
-      when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
+      when LineBot::Bot::Event::MessageType::Image, LineBot::Bot::Event::MessageType::Video
         response = client.get_message_content(event.message['id'])
         tf = Tempfile.open("content")
         tf.write(response.body)

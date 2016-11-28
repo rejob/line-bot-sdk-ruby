@@ -4,13 +4,13 @@ require 'json'
 
 WebMock.allow_net_connect!
 
-describe Line::Bot::Client do
+describe LineBot::Bot::Client do
 
   it 'pushes the template message type confirm' do
-    uri_template = Addressable::Template.new Line::Bot::API::DEFAULT_ENDPOINT + '/message/push'
+    uri_template = Addressable::Template.new LineBot::Bot::API::DEFAULT_ENDPOINT + '/message/push'
     stub_request(:post, uri_template).to_return { |request| {:body => request.body, :status => 200} }
 
-    client = Line::Bot::Client.new do |config|
+    client = LineBot::Bot::Client.new do |config|
       config.channel_token = 'channel_token'
     end
 
@@ -47,10 +47,10 @@ describe Line::Bot::Client do
   end
 
   it 'replies the template message type confirm' do
-    uri_template = Addressable::Template.new Line::Bot::API::DEFAULT_ENDPOINT + '/message/reply'
+    uri_template = Addressable::Template.new LineBot::Bot::API::DEFAULT_ENDPOINT + '/message/reply'
     stub_request(:post, uri_template).to_return { |request| {:body => request.body, :status => 200} }
 
-    client = Line::Bot::Client.new do |config|
+    client = LineBot::Bot::Client.new do |config|
       config.channel_token = 'channel_token'
     end
 

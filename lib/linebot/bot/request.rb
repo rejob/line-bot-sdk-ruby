@@ -12,19 +12,19 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-require 'line/bot/api/version'
+require 'linebot/bot/api/version'
 require 'json'
 require 'net/http'
 require 'uri'
 
-module Line
+module LineBot
   module Bot
     class Request
       attr_accessor :endpoint, :endpoint_path, :credentials, :to, :reply_token, :messages, :httpclient
 
       # Initializes a new Request
       #
-      # @return [Line::Bot::Request]
+      # @return [LineBot::Bot::Request]
       def initialize
         yield(self) if block_given?
       end
@@ -44,7 +44,7 @@ module Line
       def header
         header = {
           'Content-Type' => 'application/json; charset=UTF-8',
-          'User-Agent' => "LINE-BotSDK-Ruby/#{Line::Bot::API::VERSION}",
+          'User-Agent' => "LINE-BotSDK-Ruby/#{LineBot::Bot::API::VERSION}",
         }
         hash = credentials.inject({}) { |h, (k, v)| h[k] = v.to_s; h }
 

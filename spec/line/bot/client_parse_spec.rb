@@ -188,7 +188,7 @@ UNSUPPORT_MESSAGE_EVENT_CONTENT = <<"EOS"
 }
 EOS
 
-describe Line::Bot::Client do
+describe LineBot::Bot::Client do
 
   before do
   end
@@ -200,7 +200,7 @@ describe Line::Bot::Client do
   end
 
   def generate_client
-    client = Line::Bot::Client.new do |config|
+    client = LineBot::Bot::Client.new do |config|
       config.channel_token = dummy_config[:channel_token]
     end
 
@@ -212,56 +212,56 @@ describe Line::Bot::Client do
     events = client.parse_events_from(EVENTS_CONTENT)
 
     message = {"id" => "contentid", "type" => "text", "text" => "message"}
-    expect(events[0]).to be_a(Line::Bot::Event::Message)
-    expect(events[0].type).to eq(Line::Bot::Event::MessageType::Text)
+    expect(events[0]).to be_a(LineBot::Bot::Event::Message)
+    expect(events[0].type).to eq(LineBot::Bot::Event::MessageType::Text)
     expect(events[0].message).to eq message
 
     message = {"id"=>"contentid", "type"=>"image"}
-    expect(events[1]).to be_a(Line::Bot::Event::Message)
-    expect(events[1].type).to eq(Line::Bot::Event::MessageType::Image)
+    expect(events[1]).to be_a(LineBot::Bot::Event::Message)
+    expect(events[1].type).to eq(LineBot::Bot::Event::MessageType::Image)
     expect(events[1].message).to eq message
 
     message = {"id"=>"contentid", "type"=>"video"}
-    expect(events[2]).to be_a(Line::Bot::Event::Message)
-    expect(events[2].type).to eq(Line::Bot::Event::MessageType::Video)
+    expect(events[2]).to be_a(LineBot::Bot::Event::Message)
+    expect(events[2].type).to eq(LineBot::Bot::Event::MessageType::Video)
     expect(events[2].message).to eq message
 
     message = {"id"=>"contentid", "type"=>"audio"}
-    expect(events[3]).to be_a(Line::Bot::Event::Message)
-    expect(events[3].type).to eq(Line::Bot::Event::MessageType::Audio)
+    expect(events[3]).to be_a(LineBot::Bot::Event::Message)
+    expect(events[3].type).to eq(LineBot::Bot::Event::MessageType::Audio)
     expect(events[3].message).to eq message
 
     message = {"id"=>"contentid", "type"=>"location", "title"=>"label", "address"=>"tokyo", "latitude"=>-34.12, "longitude"=>134.23}
-    expect(events[4]).to be_a(Line::Bot::Event::Message)
-    expect(events[4].type).to eq(Line::Bot::Event::MessageType::Location)
+    expect(events[4]).to be_a(LineBot::Bot::Event::Message)
+    expect(events[4].type).to eq(LineBot::Bot::Event::MessageType::Location)
     expect(events[4].message).to eq message
 
     message = {"id"=>"contentid", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"2"}
-    expect(events[5]).to be_a(Line::Bot::Event::Message)
-    expect(events[5].type).to eq(Line::Bot::Event::MessageType::Sticker)
+    expect(events[5]).to be_a(LineBot::Bot::Event::Message)
+    expect(events[5].type).to eq(LineBot::Bot::Event::MessageType::Sticker)
     expect(events[5].message).to eq message
 
-    expect(events[6]).to be_a(Line::Bot::Event::Follow)
-    expect(events[7]).to be_a(Line::Bot::Event::Unfollow)
-    expect(events[8]).to be_a(Line::Bot::Event::Join)
-    expect(events[9]).to be_a(Line::Bot::Event::Leave)
-    expect(events[10]).to be_a(Line::Bot::Event::Postback)
-    expect(events[11]).to be_a(Line::Bot::Event::Beacon)
+    expect(events[6]).to be_a(LineBot::Bot::Event::Follow)
+    expect(events[7]).to be_a(LineBot::Bot::Event::Unfollow)
+    expect(events[8]).to be_a(LineBot::Bot::Event::Join)
+    expect(events[9]).to be_a(LineBot::Bot::Event::Leave)
+    expect(events[10]).to be_a(LineBot::Bot::Event::Postback)
+    expect(events[11]).to be_a(LineBot::Bot::Event::Beacon)
   end
 
   it 'parses unknown event' do
     client = generate_client
     events = client.parse_events_from(UNKNOWN_EVENT_CONTENT)
 
-    expect(events[0]).to be_a(Line::Bot::Event::Base)
+    expect(events[0]).to be_a(LineBot::Bot::Event::Base)
   end
 
   it 'parses unsupport message event' do
     client = generate_client
     events = client.parse_events_from(UNSUPPORT_MESSAGE_EVENT_CONTENT)
 
-    expect(events[0]).to be_a(Line::Bot::Event::Message)
-    expect(events[0].type).to eq(Line::Bot::Event::MessageType::Unsupport)
+    expect(events[0]).to be_a(LineBot::Bot::Event::Message)
+    expect(events[0].type).to eq(LineBot::Bot::Event::MessageType::Unsupport)
   end
 
 end

@@ -13,7 +13,7 @@ EOS
 
 WebMock.allow_net_connect!
 
-describe Line::Bot::Client do
+describe LineBot::Bot::Client do
 
   before do
   end
@@ -25,7 +25,7 @@ describe Line::Bot::Client do
   end
 
   def generate_client
-    client = Line::Bot::Client.new do |config|
+    client = LineBot::Bot::Client.new do |config|
       config.channel_token = dummy_config[:channel_token]
     end
 
@@ -33,9 +33,9 @@ describe Line::Bot::Client do
   end
 
   it 'gets message content' do
-    endpoint = Line::Bot::API::DEFAULT_ENDPOINT
+    endpoint = LineBot::Bot::API::DEFAULT_ENDPOINT
 
-    uri_template = Addressable::Template.new Line::Bot::API::DEFAULT_ENDPOINT + '/message/{identifier}/content'
+    uri_template = Addressable::Template.new LineBot::Bot::API::DEFAULT_ENDPOINT + '/message/{identifier}/content'
     stub_request(:get, uri_template).to_return { |request| {:body => request.body, :status => 200} }
 
     client = generate_client
@@ -45,7 +45,7 @@ describe Line::Bot::Client do
   end
 
   it 'gets profile information' do
-    uri_template = Addressable::Template.new Line::Bot::API::DEFAULT_ENDPOINT + '/profile/{user_id}'
+    uri_template = Addressable::Template.new LineBot::Bot::API::DEFAULT_ENDPOINT + '/profile/{user_id}'
     stub_request(:get, uri_template).to_return { |request| {:body => PROFILES_CONTENT, :status => 200} }
 
     client = generate_client

@@ -12,34 +12,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-require 'line/bot/api/version'
-require 'json'
-require 'net/http'
-require 'uri'
-
-module Line
+module LineBot
   module Bot
-    class HTTPClient
-
-      # @return [Net::HTTP]
-      def http(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        if uri.scheme == "https"
-          http.use_ssl = true
-        end
-
-        http
-      end
-
-      def get(url, header = {})
-        uri = URI(url)
-        http(uri).get(uri.request_uri, header)
-      end
-
-      def post(url, payload, header = {})
-        uri = URI(url)
-        http(uri).post(uri.request_uri, payload, header)
-      end
+    module API
+      class Error < StandardError; end
+      class InvalidCredentialsError < Error; end
     end
   end
 end

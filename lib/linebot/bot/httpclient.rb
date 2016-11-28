@@ -12,10 +12,33 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-module Line
+require 'linebot/bot/api/version'
+require 'json'
+require 'net/http'
+require 'uri'
+
+module LineBot
   module Bot
-    module Event
-      class Postback < Base
+    class HTTPClient
+
+      # @return [Net::HTTP]
+      def http(uri)
+        http = Net::HTTP.new(uri.host, uri.port)
+        if uri.scheme == "https"
+          http.use_ssl = true
+        end
+
+        http
+      end
+
+      def get(url, header = {})
+        uri = URI(url)
+        http(uri).get(uri.request_uri, header)
+      end
+
+      def post(url, payload, header = {})
+        uri = URI(url)
+        http(uri).post(uri.request_uri, payload, header)
       end
     end
   end

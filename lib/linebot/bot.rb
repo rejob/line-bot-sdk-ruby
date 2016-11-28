@@ -12,10 +12,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-require 'line/bot/client'
-require 'line/bot/event'
-require 'line/bot/api/errors'
-require 'line/bot/api'
-require 'line/bot/request'
-require 'line/bot/httpclient'
-require 'line/bot/api/version'
+require 'linebot/bot/client'
+require 'linebot/bot/event'
+require 'linebot/bot/api/errors'
+require 'linebot/bot/api'
+require 'linebot/bot/request'
+require 'linebot/bot/httpclient'
+require 'linebot/bot/api/version'

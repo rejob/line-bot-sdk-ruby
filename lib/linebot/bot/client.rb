@@ -12,13 +12,13 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-require 'line/bot/request'
-require 'line/bot/api/errors'
+require 'linebot/bot/request'
+require 'linebot/bot/api/errors'
 require 'base64'
 require 'net/http'
 require 'openssl'
 
-module Line
+module LineBot
   module Bot
     class Client
 
@@ -32,7 +32,7 @@ module Line
       #
       # @param options [Hash]
       #
-      # @return [Line::Bot::Client]
+      # @return [LineBot::Bot::Client]
       def initialize(options = {})
         options.each do |key, value|
           instance_variable_set("@#{key}", value)
@@ -41,11 +41,11 @@ module Line
       end
 
       def httpclient
-        @httpclient ||= Line::Bot::HTTPClient.new
+        @httpclient ||= LineBot::Bot::HTTPClient.new
       end
 
       def endpoint
-        @endpoint ||= Line::Bot::API::DEFAULT_ENDPOINT
+        @endpoint ||= LineBot::Bot::API::DEFAULT_ENDPOINT
       end
 
       # @return [Hash]
@@ -66,7 +66,7 @@ module Line
       #
       # @return [Net::HTTPResponse]
       def push_message(user_id, messages)
-        raise Line::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
+        raise LineBot::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
 
         messages = [messages] if messages.is_a?(Hash)
 
@@ -89,7 +89,7 @@ module Line
       #
       # @return [Net::HTTPResponse]
       def reply_message(token, messages)
-        raise Line::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
+        raise LineBot::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
 
         messages = [messages] if messages.is_a?(Hash)
 
@@ -106,7 +106,7 @@ module Line
       end
 
       def leave_group(group_id)
-        raise Line::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
+        raise LineBot::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
 
         request = Request.new do |config|
           config.httpclient     = httpclient
@@ -119,7 +119,7 @@ module Line
       end
 
       def leave_room(room_id)
-        raise Line::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
+        raise LineBot::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
 
         request = Request.new do |config|
           config.httpclient     = httpclient
@@ -157,7 +157,7 @@ module Line
       #
       # @return [Net::HTTPResponse]
       def get(endpoint_path)
-        raise Line::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
+        raise LineBot::Bot::API::InvalidCredentialsError, 'Invalidates credentials' unless credentials?
 
         request = Request.new do |config|
           config.httpclient     = httpclient
@@ -173,16 +173,16 @@ module Line
       #
       # @param request_body [String]
       #
-      # @return [Array<Line::Bot::Event::Class>]
+      # @return [Array<LineBot::Bot::Event::Class>]
       def parse_events_from(request_body)
         json = JSON.parse(request_body)
 
         json['events'].map { |item|
           begin
-            klass = Line::Bot::Event.const_get(item['type'].capitalize)
+            klass = LineBot::Bot::Event.const_get(item['type'].capitalize)
             klass.new(item)
           rescue NameError => e
-            Line::Bot::Event::Base.new(item)
+            LineBot::Bot::Event::Base.new(item)
           end
         }
       end

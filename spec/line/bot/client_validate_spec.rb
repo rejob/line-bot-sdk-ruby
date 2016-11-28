@@ -147,7 +147,7 @@ VALIDATION_CONTENT = <<"EOS"
 }
 EOS
 
-describe Line::Bot::Client do
+describe LineBot::Bot::Client do
 
   def dummy_config
     {
@@ -157,7 +157,7 @@ describe Line::Bot::Client do
   end
 
   it 'validates signature to success' do
-    client = Line::Bot::Client.new do |config|
+    client = LineBot::Bot::Client.new do |config|
       config.channel_secret = dummy_config[:channel_secret]
       config.channel_token = dummy_config[:channel_token]
     end
@@ -168,7 +168,7 @@ describe Line::Bot::Client do
   end
 
   it 'validates signature to failure' do
-    client = Line::Bot::Client.new do |config|
+    client = LineBot::Bot::Client.new do |config|
       config.channel_secret = dummy_config[:channel_secret]
       config.channel_token = dummy_config[:channel_token]
     end

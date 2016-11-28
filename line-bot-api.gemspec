@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'line/bot/api/version'
+require 'linebot/bot/api/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "line-bot-api"
-  spec.version       = Line::Bot::API::VERSION
+  spec.version       = LineBot::Bot::API::VERSION
   spec.authors       = ["LINE Corporation"]
   spec.email         = ["hirohisa.kawasaki@gmail.com"]
 
-  spec.description   = "Line::Bot::API - SDK of the LINE Messaging API for Ruby"
+  spec.description   = "LineBot::Bot::API - SDK of the LINE Messaging API for Ruby"
   spec.summary       = "SDK of the LINE Messaging API"
   spec.homepage      = "https://github.com/line/line-bot-sdk-ruby"
   spec.license       = "Apache-2.0"

@@ -12,10 +12,19 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-module Line
+module LineBot
   module Bot
-    module API
-      VERSION = "1.0.0"
+    module Event
+      class Base
+        def initialize(src)
+          @src = src
+        end
+
+        def [](key)
+          @src[key]
+        end
+
+      end
     end
   end
 end

@@ -12,11 +12,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-module Line
+module LineBot
   module Bot
     module API
-      class Error < StandardError; end
-      class InvalidCredentialsError < Error; end
+      DEFAULT_ENDPOINT = "https://api.line.me/v2/bot"
     end
   end
 end

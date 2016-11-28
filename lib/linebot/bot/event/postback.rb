@@ -12,10 +12,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-module Line
+module LineBot
   module Bot
     module Event
-      class Unfollow < Base
+      class Postback < Base
       end
     end
   end
